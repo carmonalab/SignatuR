@@ -22,12 +22,70 @@ cell_types.mm <-  Mm$AddChild("Cell_types")
 programs.mm <-  Mm$AddChild("Programs")
 compartments.mm <- Mm$AddChild("Compartments")
 
-print(SignatuR)
-plot(SignatuR)
+#Read in a list of signatures (from scGate blocklists)
+base::load("data-raw/genes.blacklist.default.RData")
 
-#Add signatures
-Tcr <- compartments.hs$AddChild("TCR", Reference = "TCR genes", Signature= c("TRAC","TRBC1","TRBC2"))
-cycling <- compartments.hs$AddChild("cycling", Reference = "Tirosh et al.", Signature=c("MKI67","TOP2A"))
+###########################################
+# ADD SIGNATURES
+# - mouse
+programs.mm$AddChild("cellCycle.G1S",
+                         Reference = "Tirosh et al. Science (2016)",
+                         Signature=genes.blacklist.default$Mm$cellCycle.G1S)
+
+programs.mm$AddChild("cellCycle.G2M",
+                         Reference = "Tirosh et al. Science (2016)",
+                         Signature=genes.blacklist.default$Mm$cellCycle.G2M)
+
+programs.mm$AddChild("HeatShock",
+                         Reference = "Curated HSPs",
+                         Signature=genes.blacklist.default$Mm$HeatShock)
+
+programs.mm$AddChild("IfnResp",
+                     Reference = "Interferon response genes",
+                     Signature=genes.blacklist.default$Mm$IfnResp)
+
+
+compartments.mm$AddChild("Mito",
+                         Reference = "Mitochondrial genes",
+                         Signature=genes.blacklist.default$Mm$Mito)
+
+compartments.mm$AddChild("Ribo",
+                         Reference = "Ribosomal genes",
+                         Signature=genes.blacklist.default$Mm$Ribo)
+
+compartments.mm$AddChild("TCR",
+                         Reference = "T cell receptor genes",
+                         Signature=genes.blacklist.default$Mm$TCR)
+# - human
+programs.hs$AddChild("cellCycle.G1S",
+                     Reference = "Tirosh et al. Science (2016)",
+                     Signature=genes.blacklist.default$Hs$cellCycle.G1S)
+
+programs.hs$AddChild("cellCycle.G2M",
+                     Reference = "Tirosh et al. Science (2016)",
+                     Signature=genes.blacklist.default$Hs$cellCycle.G2M)
+
+compartments.hs$AddChild("Mito",
+                         Reference = "Mitochondrial genes",
+                         Signature=genes.blacklist.default$Hs$Mito)
+
+compartments.hs$AddChild("Ribo",
+                         Reference = "Ribosomal genes",
+                         Signature=genes.blacklist.default$Hs$Ribo)
+
+compartments.hs$AddChild("TCR",
+                         Reference = "T cell receptor genes",
+                         Signature=genes.blacklist.default$Hs$TCR)
+
+
+#Set format for visualizing
+SetFormat(SignatuR, "Signature", formatFun = function(x) {
+  if (length(x) > 3) {
+    paste0(c(x[1:3], "..."))
+  } else {
+    x[1:length(x)]
+  }
+})
 
 
 #Visualize and access
@@ -35,8 +93,8 @@ print(SignatuR)
 print(SignatuR, "Reference","Signature")
 plot(SignatuR)
 
-SignatuR$Hs$Compartments$Get("Signature")
-SignatuR$Hs$Compartments$Get("Signature", filterFun = isLeaf)
+head(SignatuR$Hs$Compartments$TCR$Signature)
+lapply(SignatuR$Hs$Compartments$Get("Signature", filterFun = isLeaf), head)
 
 #Save processed data
 usethis::use_data(SignatuR, overwrite = TRUE)
