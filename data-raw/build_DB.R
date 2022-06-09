@@ -78,6 +78,8 @@ compartments.hs$AddChild("TCR",
                          Signature=genes.blacklist.default$Hs$TCR)
 
 
+
+
 #Set format for visualizing
 SetFormat(SignatuR, "Signature", formatFun = function(x) {
   if (length(x) > 3) {
