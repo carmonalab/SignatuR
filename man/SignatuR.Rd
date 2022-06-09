@@ -8,6 +8,7 @@
 A \code{data.tree} object with signatures organized by species and category. Gene lists are stored in the "Signature" attribute,
 comments and references for the signature are stored in the "Reference" attribute.
 \describe{
+\item{Load DB}{\code{library(SignatuR)} \cr \code{data("SignatuR")}}
 \item{See database structure}{\code{print(SignatuR)}}
 \item{Plot database structure}{\code{library(DiagrammeR)} \cr
 \code{plot(SignatuR)}}

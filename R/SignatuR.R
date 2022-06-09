@@ -5,6 +5,7 @@
 #' @format A `data.tree` object with signatures organized by species and category. Gene lists are stored in the "Signature" attribute,
 #' comments and references for the signature are stored in the "Reference" attribute.
 #' \describe{
+#'   \item{Load DB}{`library(SignatuR)` \cr `data("SignatuR")`}
 #'   \item{See database structure}{`print(SignatuR)`}
 #'   \item{Plot database structure}{`library(DiagrammeR)` \cr
 #'                                  `plot(SignatuR)`}

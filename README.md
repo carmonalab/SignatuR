@@ -17,6 +17,12 @@ Gene lists are stored in the "Signature" attribute, comments and references for 
 See the examples below to browse and access this data type.
 
 
+* Load database into memory
+```
+library(SignatuR)
+data("SignatuR")
+```
+
 * See database structure
 ```
 print(SignatuR)
