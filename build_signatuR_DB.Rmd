@@ -1,0 +1,56 @@
+---
+title: "Build DB of signatures"
+knit: (function(input_file, encoding) {
+  out_dir <- 'docs';
+  rmarkdown::render(input_file,
+ encoding=encoding,
+ output_file=file.path(dirname(input_file), out_dir, 'index.html'))})
+---
+
+Dependencies
+```{r}
+library(data.tree)
+library(DiagrammeR)
+```
+
+Set up root and species
+```{r}
+SignatuR <- Node$new("SignatuR")
+
+Hs <- SignatuR$AddChild("Hs")
+Mm <- SignatuR$AddChild("Mm") 
+```
+
+Set up layer of broad categories
+```{r}
+blocklists.hs <- Hs$AddChild("Blocklists")
+cell_types.hs <-  Hs$AddChild("Cell_types")
+programs.hs <-  Hs$AddChild("Programs")
+compartments.hs <- Hs$AddChild("Compartments")
+
+blocklists.mm <- Mm$AddChild("Blocklists")
+cell_types.mm <-  Mm$AddChild("Cell_types")
+programs.mm <-  Mm$AddChild("Programs")
+compartments.mm <- Mm$AddChild("Compartments")
+
+print(SignatuR)
+plot(SignatuR)
+```
+
+Add signatures
+```{r}
+Tcr <- compartments.hs$AddChild("TCR", Reference = "TCR genes", Signature= c("TRAC","TRBC1","TRBC2"))
+cycling <- compartments.hs$AddChild("cycling", Reference = "Tirosh et al.", Signature=c("MKI67","TOP2A"))
+```
+
+Visualize and access
+```{r}
+print(SignatuR)
+print(SignatuR, "Reference","Signature")
+plot(SignatuR)
+
+
+SignatuR$Hs$Compartments$Get("Signature", filterFun = isLeaf)
+```
+
+
