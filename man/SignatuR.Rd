@@ -8,8 +8,6 @@
 A \code{data.tree} object with signatures organized by species and category. Gene lists are stored in the "Signature" attribute,
 comments and references for the signature are stored in the "Reference" attribute.
 \describe{
-\item{Load DB}{
-\code{library(SignatuR)} \cr \code{data("SignatuR")}}
 \item{See database structure}{
 \code{print(SignatuR)}}
 \item{Plot database structure}{
@@ -20,8 +18,8 @@ comments and references for the signature are stored in the "Reference" attribut
 \code{SignatuR$Hs$Compartments$TCR$Signature}}
 \item{Extract all signatures below a given node (Get accessor)}{
 \code{SignatuR$Hs$Compartments$Get("Signature", filterFun = isLeaf)}}
-\item{Add a new signature to the DB (e.g. to cell types node)}{
-\code{node <- SignatuR$Mm$Cell_types} \cr \code{node$AddChild("Tcell", Reference="A simple T cell signature", Signature=c("Cd2","Cd3d","Cd3e"))}}
+\item{Add a new signature to the DB (e.g. to Cell_types node)}{
+\code{mySignatuR <- Clone(SignatuR)} \cr \code{mySignatuR$Mm$Cell_types$AddChild("Tcell", Reference="A simple T cell signature", Signature=c("Cd2","Cd3d","Cd3e"))}}
 }
 }
 \usage{

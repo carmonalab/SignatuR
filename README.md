@@ -7,6 +7,7 @@ A database of useful gene signatures for single-cell analysis
 Get the database and the documentation using:
 ```
 remotes::install_github("carmonalab/SignatuR")
+library(data.tree)
 library(SignatuR)
 ```
 
@@ -48,6 +49,11 @@ lapply(ss, head)
 
 * Add a new signature to the DB (e.g. to "Cell_types" node)
 ```
-node <- SignatuR$Mm$Cell_types 
+#First make local copy
+mySignatuR <- Clone(SignatuR)
+#Symlink to node
+node <- mySignatuR$Mm$Cell_types
+#Add signature 
 node$AddChild("Tcell", Reference="A simple T cell signature", Signature=c("Cd2","Cd3d","Cd3e"))
+mySignatuR
 ```
