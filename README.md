@@ -40,7 +40,7 @@ plot(SignatuR)
 s <- GetSignature(SignatuR$Mm$Programs$HeatShock)
 ```
 
-* Extract all signatures below a given node (Get accessor)
+* Extract all signatures below a given node
 ```
 ss <- GetSignature(SignatuR$Mm$Programs)
 ```
@@ -50,7 +50,7 @@ ss <- GetSignature(SignatuR$Mm$Programs)
 SignatuR <- AddSignature(SignatuR,
 	node=SignatuR$Mm$Cell_types,name="T_cell",
 	reference="A simple T cell signature",
-	signature=c("Cd2","Cd3d","Cd3e"
+	signature=c("Cd2","Cd3d","Cd3e"))
 ```
 
 * Add a new node to the DB
