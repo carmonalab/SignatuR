@@ -4,19 +4,18 @@ A database of useful gene signatures for single-cell analysis
 
 
 ## Install
-Get the database and the documentation using:
+Get the database and its accessor functions:
 ```
 remotes::install_github("carmonalab/SignatuR")
-library(data.tree)
 library(SignatuR)
 ```
 
 ## Data format
 
-The DB is structured as a `data.tree` object, with signatures organized by species and category.
+The DB is structured as a [data.tree](https://cran.r-project.org/web/packages/data.tree/vignettes/data.tree.html) object, with signatures organized by species and category.
 Gene lists are stored in the "Signature" attribute, comments and references for the signature are stored in the "Reference" attribute.
 
-See the examples below to browse and access this data type.
+Several functions for easy interaction with the data structure have been implemented. See some examples below:
 
 
 * See database structure
@@ -29,7 +28,7 @@ SignatuR
 print(SignatuR, "Reference","Signature")
 ```
 
-* Plot database structure
+* Plot database structure (requires installing `DiagrammeR`)
 ```
 library(DiagrammeR)
 plot(SignatuR)
@@ -63,4 +62,8 @@ SignatuR <- AddNode(SignatuR, parent_node=SignatuR$Hs, name="New_category")
 usethis::use_data(SignatuR, overwrite = TRUE)
 ```
 
+## To do
+
+* Consider non-programmatical interface to add signatures (e.g. editing a text/csv file)
+* Consider adding nodes for signature sets used by other tools
 
