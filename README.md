@@ -21,7 +21,12 @@ See the examples below to browse and access this data type.
 
 * See database structure
 ```
-print(SignatuR)
+SignatuR
+```
+
+* See database with annotations
+```
+print(SignatuR, "Reference","Signature")
 ```
 
 * Plot database structure
@@ -30,30 +35,32 @@ library(DiagrammeR)
 plot(SignatuR)
 ```
 
-* See database with annotations
-```
-print(SignatuR, "Reference","Signature")
-```
-
 * Extract a specific signature
 ```
-s <- SignatuR$Hs$Compartments$TCR$Signature
-head(s)
+s <- GetSignature(SignatuR$Mm$Programs$HeatShock)
 ```
 
 * Extract all signatures below a given node (Get accessor)
 ```
-ss <- SignatuR$Hs$Compartments$Get("Signature", filterFun = isLeaf)
-lapply(ss, head)
+ss <- GetSignature(SignatuR$Mm$Programs)
 ```
 
 * Add a new signature to the DB (e.g. to "Cell_types" node)
 ```
-#First make local copy
-mySignatuR <- Clone(SignatuR)
-#Symlink to node
-node <- mySignatuR$Mm$Cell_types
-#Add signature 
-node$AddChild("Tcell", Reference="A simple T cell signature", Signature=c("Cd2","Cd3d","Cd3e"))
-mySignatuR
+SignatuR <- AddSignature(SignatuR,
+	node=SignatuR$Mm$Cell_types,name="T_cell",
+	reference="A simple T cell signature",
+	signature=c("Cd2","Cd3d","Cd3e"
 ```
+
+* Add a new node to the DB
+```
+SignatuR <- AddNode(SignatuR, parent_node=SignatuR$Hs, name="New_category")
+```
+
+* Save updated database (for package developers)
+```
+usethis::use_data(SignatuR, overwrite = TRUE)
+```
+
+

@@ -8,18 +8,21 @@
 A \code{data.tree} object with signatures organized by species and category. Gene lists are stored in the "Signature" attribute,
 comments and references for the signature are stored in the "Reference" attribute.
 \describe{
-\item{See database structure}{
-\code{print(SignatuR)}}
-\item{Plot database structure}{
-\code{library(DiagrammeR)} \cr \code{plot(SignatuR)}}
+\item{See database structure}{\code{SignatuR}}
 \item{See database with annotations}{
 \code{print(SignatuR, "Reference","Signature")}}
+\item{Plot database structure}{
+\code{library(DiagrammeR)} \cr \code{plot(SignatuR)}}
 \item{Extract a specific signature}{
-\code{SignatuR$Hs$Compartments$TCR$Signature}}
-\item{Extract all signatures below a given node (Get accessor)}{
-\code{SignatuR$Hs$Compartments$Get("Signature", filterFun = isLeaf)}}
-\item{Add a new signature to the DB (e.g. to Cell_types node)}{
-\code{mySignatuR <- Clone(SignatuR)} \cr \code{mySignatuR$Mm$Cell_types$AddChild("Tcell", Reference="A simple T cell signature", Signature=c("Cd2","Cd3d","Cd3e"))}}
+\code{GetSignature(SignatuR$Mm$Programs$HeatShock)}}
+\item{Extract all signatures below a given node}{
+\code{GetSignature(SignatuR$Mm$Programs)}}
+\item{Add a new signature to the DB}{
+\verb{SignatuR <- AddSignature(SignatuR, node=SignatuR$Mm$Cell_types,name="T_cell", reference="A simple T cell signature", signature=c("Cd2","Cd3d","Cd3e")}}
+\item{Add a new node to the DB}{
+\code{SignatuR <- AddNode(SignatuR, parent_node=SignatuR$Hs, name="New_category")}}
+\item{Save updated database (for developers)}{
+\code{usethis::use_data(SignatuR, overwrite = TRUE)}}
 }
 }
 \usage{
