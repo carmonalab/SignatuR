@@ -1,6 +1,6 @@
 Package: SignatuR
 Title: Signatures for single-cell data analysis
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: c(
   person('Massimo', 'Andreatta', 
      email = 'massimo.andreatta@unil.ch',
