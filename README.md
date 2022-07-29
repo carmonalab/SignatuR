@@ -65,7 +65,7 @@ usethis::use_data(SignatuR, overwrite = TRUE)
 
 ## Use examples
 
-* In gene feature selection for (data integration)[https://carmonalab.github.io/STACAS.demo/STACAS.demo.html#important-notes]
+* In gene feature selection for [data integration](https://carmonalab.github.io/STACAS.demo/STACAS.demo.html#important-notes)
 
 ## To do
 
