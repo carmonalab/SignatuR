@@ -62,6 +62,11 @@ SignatuR <- AddNode(SignatuR, parent_node=SignatuR$Hs, name="New_category")
 usethis::use_data(SignatuR, overwrite = TRUE)
 ```
 
+
+## Use examples
+
+* In gene feature selection for (data integration)[https://carmonalab.github.io/STACAS.demo/STACAS.demo.html#important-notes]
+
 ## To do
 
 * Consider non-programmatical interface to add signatures (e.g. editing a text/csv file)
