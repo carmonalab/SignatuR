@@ -59,6 +59,7 @@ GetSignature <- function(node) {
 #' @param name Signature name
 #' @param signature Gene signature, as a vector of genes
 #' @param reference A text describing source of the signature or other comments
+#' @param overwrite Whether to replace an already existing signature with the same name
 #' @return An update database containing the new signature
 #' @examples
 #' SignatuR <- AddSignature(SignatuR, node=SignatuR$Mm$Cell_types,
@@ -66,7 +67,9 @@ GetSignature <- function(node) {
 #' @import data.tree
 #' @export 
 
-AddSignature <- function(db, node, name="New_signature", signature=NA, reference=NA) {
+AddSignature <- function(db, node, name="New_signature",
+                         signature=NA, reference=NA,
+                         overwrite=FALSE) {
    clone <- Clone(db)
    path <- node$Climb()$path
 
@@ -75,10 +78,21 @@ AddSignature <- function(db, node, name="New_signature", signature=NA, reference
      for (i in 2:length(path)) {
        loc <- loc[[path[i]]]
      }
-   }   
+   }
+   
+   #check existing children
+   if (name %in% names(node$children)) {
+     if (overwrite == TRUE) {
+       warning(sprintf("Overwriting signature %s", name))
+     } else {
+       stop(sprintf("Signature %s is already present. Set overwrite=TRUE to replace it.", name))
+     }
+   }
+   #add child
    loc$AddChild(name=name,
-                Reference=reference,
-                Signature=signature)
+                  Reference=reference,
+                  Signature=signature)
+   
    
    sig_reformat(clone)
    return(clone)
