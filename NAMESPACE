@@ -3,4 +3,5 @@
 export(AddNode)
 export(AddSignature)
 export(GetSignature)
+export(RemoveSignature)
 import(data.tree)

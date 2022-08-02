@@ -19,33 +19,33 @@ Several functions for easy interaction with the data structure have been impleme
 
 
 * See database structure
-```
+```r
 SignatuR
 ```
 
 * See database with annotations
-```
+```r
 print(SignatuR, "Reference","Signature")
 ```
 
 * Plot database structure (requires installing `DiagrammeR`)
-```
+```r
 library(DiagrammeR)
 plot(SignatuR)
 ```
 
 * Extract a specific signature
-```
+```r
 s <- GetSignature(SignatuR$Mm$Programs$HeatShock)
 ```
 
 * Extract all signatures below a given node
-```
+```r
 ss <- GetSignature(SignatuR$Mm$Programs)
 ```
 
 * Add a new signature to the DB (e.g. to "Cell_types" node)
-```
+```r
 SignatuR <- AddSignature(SignatuR,
 	node=SignatuR$Mm$Cell_types,name="T_cell",
 	reference="A simple T cell signature",
@@ -53,12 +53,22 @@ SignatuR <- AddSignature(SignatuR,
 ```
 
 * Add a new node to the DB
-```
+```r
 SignatuR <- AddNode(SignatuR, parent_node=SignatuR$Hs, name="New_category")
 ```
 
-* Save updated database (for package developers)
+* Remove a signature or a node from the DB
+```r
+SignatuR <- RemoveSignature(SignatuR, node=SignatuR$Hs$Compartments$TCR)
 ```
+
+* Make a clone of the DB (allows you to edit without breaking the DB)
+```r
+SignatuR.copy <- Clone(SignatuR)
+```
+
+* Save updated database (for package developers)
+```r
 usethis::use_data(SignatuR, overwrite = TRUE)
 ```
 

@@ -84,6 +84,24 @@ AddSignature <- function(db, node, name="New_signature", signature=NA, reference
    return(clone)
 }
 
+#' Remove signature from DB
+#'
+#' Remove a given signature or node from the database
+#'
+#' @param node A database node to be removed
+#' @examples
+#' SignatuR <- RemoveSignature(SignatuR, node=SignatuR$Hs$Compartments$TCR)
+#' @import data.tree
+#' @export 
+
+RemoveSignature <- function(node) {
+  parent <- node$parent
+  m <- names(parent$children) != node$name
+  parent$children <- parent$children[m]
+  sig_reformat(node)
+  invisible(node)
+}  
+
 #' Add node to DB
 #'
 #' Add a new internal node to the DB. This generates a local, updated copy of the database.
