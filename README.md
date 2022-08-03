@@ -47,14 +47,17 @@ ss <- GetSignature(SignatuR$Mm$Programs)
 * Add a new signature to the DB (e.g. to "Cell_types" node)
 ```r
 SignatuR <- AddSignature(SignatuR,
-	node=SignatuR$Mm$Cell_types,name="T_cell",
+	node=SignatuR$Mm$Cell_types,
+	name="T_cell",
 	reference="A simple T cell signature",
 	signature=c("Cd2","Cd3d","Cd3e"))
 ```
 
 * Add a new node to the DB
 ```r
-SignatuR <- AddNode(SignatuR, parent_node=SignatuR$Hs, name="New_category")
+SignatuR <- AddNode(SignatuR,
+  parent_node=SignatuR$Hs,
+  name="New_category")
 ```
 
 * Remove a signature or a node from the DB
