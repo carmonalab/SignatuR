@@ -59,12 +59,22 @@ SignatuR <- AddNode(SignatuR, parent_node=SignatuR$Hs, name="New_category")
 
 * Remove a signature or a node from the DB
 ```r
-SignatuR <- RemoveSignature(SignatuR, node=SignatuR$Hs$Compartments$TCR)
+RemoveSignature(SignatuR$Hs$Compartments$TCR)
 ```
 
 * Make a clone of the DB (allows you to edit without breaking the DB)
 ```r
-SignatuR.copy <- Clone(SignatuR)
+SignatuR.copy <- data.tree::Clone(SignatuR)
+```
+
+* Save a local copy of your modified SignatuR DB
+```r
+SaveSignatuR(SignatuR, file="mySignatuR.rds")
+```
+
+* Load a local copy of SignatuR from disk
+```r
+mySignatuR <- LoadSignatuR(file="mySignatuR.rds")
 ```
 
 * Save updated database (for package developers)

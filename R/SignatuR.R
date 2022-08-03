@@ -103,8 +103,9 @@ AddSignature <- function(db, node, name="New_signature",
 #' Remove a given signature or node from the database
 #'
 #' @param node A database node to be removed
+#' @return Nothing. The DB is modified in place.
 #' @examples
-#' SignatuR <- RemoveSignature(SignatuR, node=SignatuR$Hs$Compartments$TCR)
+#' RemoveSignature(SignatuR$Hs$Compartments$TCR)
 #' @import data.tree
 #' @export 
 
@@ -147,8 +148,68 @@ AddNode <- function(db, parent_node, name="New_signature", reference=NA) {
   return(clone)
 }
 
+#' Save a local copy of SignatuR
+#'
+#' Store a modified copy of your SignatuR DB, either to a .rds or .rda file
+#'
+#' @param signatuRdb The database object to be updated
+#' @param file Destination file (.rds or .rda)
+#' @examples
+#' # Save DB
+#' SaveSignatuR(SignatuR, file="mySignatuR.rds")
+#' # Load it back
+#' mySignatuR <- LoadSignatuR(file="mySignatuR.rds")
+#' @import data.tree
+#' @importFrom tools file_ext
+#' @seealso [LoadSignatuR]
+#' @export 
+
+SaveSignatuR <- function(signatuRdb, file="mySignatuR.rds") {
+  
+  ext <- tolower(file_ext(file))
+  message(sprintf("Saving %s to file: %s", signatuRdb$name, file))
+  if (ext == "rds") {
+    saveRDS(signatuRdb, file=file)
+  } else if (ext == "rda") {
+    save(signatuRdb, file=file)
+  } else {
+    stop(sprintf("Format %s not supported", ext))
+  }
+}
+
+#' Load SignatuR from local file
+#'
+#' Load a .rds or .rda file storing a SignatuR object
+#'
+#' @param file Source file (.rds or .rda)
+#' @return A SignatuR object
+#' @examples
+#' # .rds format
+#' mySignatuR <- LoadSignatuR(file="mySignatuR.rds")
+#' # .rda format
+#' LoadSignatuR(file="mySignatuR.rda")
+#' @import data.tree
+#' @importFrom tools file_ext
+#' @seealso [SaveSignatuR]
+#' @export 
+
+LoadSignatuR <- function(file="mySignatuR.rds") {
+  
+  ext <- tolower(file_ext(file))
+  
+  if (ext == "rds") {
+    return(readRDS(file))
+  } else if (ext == "rda") {
+    name <- load(file)
+    message(sprintf("Loaded object %s", name))
+  } else {
+    stop(sprintf("Cannot read file %s", file))
+  }
+}
+
 ### HELPER (non-exported) functions
 
+#Formatting for printing signature (max 3 genes)
 sig_reformat <- function(db) {
   SetFormat(db, "Signature", formatFun = function(x) {
     if (length(x) > 3) {

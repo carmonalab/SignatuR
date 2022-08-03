@@ -9,9 +9,12 @@ RemoveSignature(node)
 \arguments{
 \item{node}{A database node to be removed}
 }
+\value{
+Nothing. The DB is modified in place.
+}
 \description{
 Remove a given signature or node from the database
 }
 \examples{
-SignatuR <- RemoveSignature(SignatuR, node=SignatuR$Hs$Compartments$TCR)
+RemoveSignature(SignatuR$Hs$Compartments$TCR)
 }
