@@ -16,10 +16,7 @@ A SignatuR object
 Load a .rds or .rda file storing a SignatuR object
 }
 \examples{
-# .rds format
 mySignatuR <- LoadSignatuR(file="mySignatuR.rds")
-# .rda format
-LoadSignatuR(file="mySignatuR.rda")
 }
 \seealso{
 \link{SaveSignatuR}

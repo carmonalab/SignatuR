@@ -83,7 +83,7 @@ AddSignature <- function(db, node, name="New_signature",
    #check existing children
    if (name %in% names(node$children)) {
      if (overwrite == TRUE) {
-       warning(sprintf("Overwriting signature %s", name))
+       message(sprintf("Overwriting signature %s", name))
      } else {
        stop(sprintf("Signature %s is already present. Set overwrite=TRUE to replace it.", name))
      }
@@ -152,26 +152,26 @@ AddNode <- function(db, parent_node, name="New_signature", reference=NA) {
 #'
 #' Store a modified copy of your SignatuR DB, either to a .rds or .rda file
 #'
-#' @param signatuRdb The database object to be updated
+#' @param db The database object to be saved
 #' @param file Destination file (.rds or .rda)
 #' @examples
 #' # Save DB
 #' SaveSignatuR(SignatuR, file="mySignatuR.rds")
 #' # Load it back
-#' mySignatuR <- LoadSignatuR(file="mySignatuR.rds")
+#' mySignatuR <- LoadSignatuR("mySignatuR.rds")
 #' @import data.tree
 #' @importFrom tools file_ext
 #' @seealso [LoadSignatuR]
 #' @export 
 
-SaveSignatuR <- function(signatuRdb, file="mySignatuR.rds") {
+SaveSignatuR <- function(db, file="mySignatuR.rds") {
   
   ext <- tolower(file_ext(file))
-  message(sprintf("Saving %s to file: %s", signatuRdb$name, file))
+  message(sprintf("Saving %s to file: %s", db$name, file))
   if (ext == "rds") {
-    saveRDS(signatuRdb, file=file)
+    saveRDS(db, file=file)
   } else if (ext == "rda") {
-    save(signatuRdb, file=file)
+    save(db, file=file)
   } else {
     stop(sprintf("Format %s not supported", ext))
   }
@@ -184,10 +184,7 @@ SaveSignatuR <- function(signatuRdb, file="mySignatuR.rds") {
 #' @param file Source file (.rds or .rda)
 #' @return A SignatuR object
 #' @examples
-#' # .rds format
 #' mySignatuR <- LoadSignatuR(file="mySignatuR.rds")
-#' # .rda format
-#' LoadSignatuR(file="mySignatuR.rda")
 #' @import data.tree
 #' @importFrom tools file_ext
 #' @seealso [SaveSignatuR]
@@ -201,7 +198,7 @@ LoadSignatuR <- function(file="mySignatuR.rds") {
     return(readRDS(file))
   } else if (ext == "rda") {
     name <- load(file)
-    message(sprintf("Loaded object %s", name))
+    return(get(name))
   } else {
     stop(sprintf("Cannot read file %s", file))
   }

@@ -53,6 +53,16 @@ SignatuR <- AddSignature(SignatuR,
 	signature=c("Cd2","Cd3d","Cd3e"))
 ```
 
+* Modify and existing signature (turn on 'overwrite' flag)
+```r
+SignatuR <- AddSignature(SignatuR,
+	node=SignatuR$Mm$Cell_types,
+	name="T_cell",
+	reference="A modified T cell signature",
+	signature=c("Cd2","Cd3d","Cd3e","Cd3g"),
+	overwrite=T)
+```
+
 * Add a new node to the DB
 ```r
 SignatuR <- AddNode(SignatuR,
@@ -77,7 +87,7 @@ SaveSignatuR(SignatuR, file="mySignatuR.rds")
 
 * Load a local copy of SignatuR from disk
 ```r
-mySignatuR <- LoadSignatuR(file="mySignatuR.rds")
+mySignatuR <- LoadSignatuR("mySignatuR.rds")
 ```
 
 * Save updated database (for package developers)

@@ -4,10 +4,10 @@
 \alias{SaveSignatuR}
 \title{Save a local copy of SignatuR}
 \usage{
-SaveSignatuR(signatuRdb, file = "mySignatuR.rds")
+SaveSignatuR(db, file = "mySignatuR.rds")
 }
 \arguments{
-\item{signatuRdb}{The database object to be updated}
+\item{db}{The database object to be saved}
 
 \item{file}{Destination file (.rds or .rda)}
 }
@@ -18,7 +18,7 @@ Store a modified copy of your SignatuR DB, either to a .rds or .rda file
 # Save DB
 SaveSignatuR(SignatuR, file="mySignatuR.rds")
 # Load it back
-mySignatuR <- LoadSignatuR(file="mySignatuR.rds")
+mySignatuR <- LoadSignatuR("mySignatuR.rds")
 }
 \seealso{
 \link{LoadSignatuR}
