@@ -94,7 +94,7 @@ AddSignature <- function(db, node, name="New_signature",
                   Signature=signature)
    
    
-   sig_reformat(clone)
+   clone <- sig_reformat(clone)
    return(clone)
 }
 
@@ -113,7 +113,7 @@ RemoveSignature <- function(node) {
   parent <- node$parent
   m <- names(parent$children) != node$name
   parent$children <- parent$children[m]
-  sig_reformat(node)
+  node <- sig_reformat(node)
   invisible(node)
 }  
 
@@ -144,7 +144,7 @@ AddNode <- function(db, parent_node, name="New_signature", reference=NA) {
   loc$AddChild(name=name,
                Reference=reference)
   
-  sig_reformat(clone)
+  clone <- sig_reformat(clone)
   return(clone)
 }
 
@@ -208,12 +208,14 @@ LoadSignatuR <- function(file="mySignatuR.rds") {
 
 #Formatting for printing signature (max 3 genes)
 sig_reformat <- function(db) {
-  SetFormat(db, "Signature", formatFun = function(x) {
+  clone <- data.tree::Clone(db)
+  SetFormat(clone, "Signature", formatFun = function(x) {
     if (length(x) > 3) {
       paste0(c(x[1:3], "..."))
     } else {
       x[1:length(x)]
     }
   })
+  return(clone)
 }
 
