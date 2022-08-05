@@ -1,6 +1,11 @@
 # SignatuR
 
-A database of useful gene signatures for single-cell analysis
+An R package to store and interact with gene signatures for single-cell analysis
+
+<p align="center">
+  <img height="80" src="docs/RSticker_SignatuR.png">
+</p>
+
 
 
 ## Install
@@ -95,13 +100,15 @@ mySignatuR <- LoadSignatuR("mySignatuR.rds")
 usethis::use_data(SignatuR, overwrite = TRUE)
 ```
 
-
 ## Use examples
 
 * In gene feature selection for [data integration](https://carmonalab.github.io/STACAS.demo/STACAS.demo.html#important-notes)
 
-## To do
 
-* Consider non-programmatical interface to add signatures (e.g. editing a text/csv file)
-* Consider adding nodes for signature sets used by other tools
+<p align="center">
+  <img height="80" src="docs/RSticker_SignatuR.png">
+</p>
+
+
+
 
