@@ -4,7 +4,14 @@
 \alias{AddSignature}
 \title{Add signature to DB}
 \usage{
-AddSignature(db, node, name = "New_signature", signature = NA, reference = NA)
+AddSignature(
+  db,
+  node,
+  name = "New_signature",
+  signature = NA,
+  reference = NA,
+  overwrite = FALSE
+)
 }
 \arguments{
 \item{db}{The database object to be updated}
@@ -16,6 +23,8 @@ AddSignature(db, node, name = "New_signature", signature = NA, reference = NA)
 \item{signature}{Gene signature, as a vector of genes}
 
 \item{reference}{A text describing source of the signature or other comments}
+
+\item{overwrite}{Whether to replace an already existing signature with the same name}
 }
 \value{
 An update database containing the new signature

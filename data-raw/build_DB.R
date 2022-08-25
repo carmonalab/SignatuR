@@ -91,12 +91,12 @@ SetFormat(SignatuR, "Signature", formatFun = function(x) {
 
 
 #Visualize and access
-print(SignatuR)
-print(SignatuR, "Reference","Signature")
-plot(SignatuR)
+#print(SignatuR)
+#print(SignatuR, "Reference","Signature")
+#plot(SignatuR)
 
-head(SignatuR$Hs$Compartments$TCR$Signature)
-lapply(SignatuR$Hs$Compartments$Get("Signature", filterFun = isLeaf), head)
+#head(SignatuR$Hs$Compartments$TCR$Signature)
+#lapply(SignatuR$Hs$Compartments$Get("Signature", filterFun = isLeaf), head)
 
 #Save processed data
 usethis::use_data(SignatuR, overwrite = TRUE)

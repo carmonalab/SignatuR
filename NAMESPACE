@@ -3,4 +3,8 @@
 export(AddNode)
 export(AddSignature)
 export(GetSignature)
+export(LoadSignatuR)
+export(RemoveSignature)
+export(SaveSignatuR)
 import(data.tree)
+importFrom(tools,file_ext)
