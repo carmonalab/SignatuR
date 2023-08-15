@@ -1,0 +1,41 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+remotes::install_github("carmonalab/SignatuR")
+library(SignatuR)
+```
+
+Add signatures to existing DB
+
+```{r}
+#M1 signature from Martinez et al. (https://journals.aai.org/jimmunol/article/177/10/7303/74645)
+sig <- read.csv("data-raw/Martinez_M1M2_macro.csv")
+M1 <- sig[sig$Type == "M1","Gene"]
+M2 <- sig[sig$Type == "M2","Gene"]
+```
+
+```{r}
+SignatuR <- AddSignature(SignatuR,
+	node=SignatuR$Hs$Programs,
+	name="M1_macrophage",
+	reference="Martinez et al. (2006) JI",
+	signature=M1)
+
+SignatuR <- AddSignature(SignatuR,
+	node=SignatuR$Hs$Programs,
+	name="M2_macrophage",
+	reference="Martinez et al. (2006) JI",
+	signature=M2)
+
+print(SignatuR, "Reference","Signature")
+```
+
+
+```{r}
+# Save updated database
+usethis::use_data(SignatuR, overwrite = TRUE)
+
+```
