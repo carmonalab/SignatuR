@@ -73,7 +73,7 @@ GetSignature <- function(node) {
 #' @export 
 
 AddSignature <- function(db, node, name="New_signature",
-                         signature=NA, reference=NA,
+                         signature=NULL, reference=NA,
                          overwrite=FALSE) {
    clone <- Clone(db)
    path <- node$Climb()$path
@@ -94,13 +94,12 @@ AddSignature <- function(db, node, name="New_signature",
      }
    }
    #add child
-   if (!is.na(signature)) {
+   if (length(signature) > 0) {
        svec <- paste(signature,collapse=",")
    }
    loc$AddChild(name=name,
                   Reference=reference,
-                  Signature=signature)
-   
+                  Signature=svec)
    
    clone <- sig_reformat(clone)
    return(clone)
