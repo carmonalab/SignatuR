@@ -250,6 +250,7 @@ csv2SignatuR <- function(file="mySignatuR.csv") {
   df$Signature <- gsub(pattern=";", replacement = ",", x = df$Signature)
   
   db <- FromDataFrameTable(df)
+  db <- sig_reformat(db)
   
   return(db)
 }
