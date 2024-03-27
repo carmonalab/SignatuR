@@ -4,7 +4,7 @@ output: html_notebook
 ---
 
 ```{r}
-remotes::install_github("carmonalab/SignatuR")
+#remotes::install_github("carmonalab/SignatuR")
 library(SignatuR)
 ```
 
