@@ -50,6 +50,7 @@ GetSignature <- function(node) {
       stop("Node does not exist.")
    }
    sigs <- node$Get("Signature")
+   sigs <- strsplit(sigs, ",")
    #Do not return empty signatures
    return(sigs[!is.na(sigs)])
 }
@@ -93,6 +94,9 @@ AddSignature <- function(db, node, name="New_signature",
      }
    }
    #add child
+   if (!is.na(signature)) {
+       svec <- paste(signature,collapse=",")
+   }
    loc$AddChild(name=name,
                   Reference=reference,
                   Signature=signature)
@@ -180,6 +184,11 @@ SaveSignatuR <- function(db, file="mySignatuR.csv") {
     save(db, file=file)
   } else if (ext == "csv") {
     df <- ToDataFrameTree(x = db, "pathString", "Reference","Signature")
+    df <- df[,-1]
+    
+    #TMP
+ #   df$Signature <- gsub(pattern=", ", replacement = ";", x = df$Signature)
+    
     df$Signature <- gsub(pattern=",", replacement = ";", x = df$Signature)
     write.csv(df, file=file)
   } else {
@@ -225,12 +234,15 @@ LoadSignatuR <- function(file="mySignatuR.csv") {
 #Formatting for printing signature (max 3 genes)
 sig_reformat <- function(db) {
   clone <- data.tree::Clone(db)
-  SetFormat(clone, "Signature", formatFun = function(x) {
-    if (length(x) > 3) {
-      paste0(c(x[1:3], "..."))
-    } else {
-      x[1:length(x)]
-    }
+  data.tree::SetFormat(node=clone, name="Signature", formatFun = function(x) {
+      if (!is.na(x)) {  
+          xvec <- strsplit(x, ",")[[1]]  
+          if (length(xvec) > 3) {
+              paste0(c(xvec[1:3], "..."), collapse=",")
+          } else {
+              paste0(xvec[1:length(xvec)], collapse=",")
+          }
+      }
   })
   return(clone)
 }
