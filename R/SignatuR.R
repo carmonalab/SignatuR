@@ -18,6 +18,10 @@
 #'   `SignatuR <- AddSignature(SignatuR, node=SignatuR$Mm$Cell_types,name="T_cell", reference="A simple T cell signature", signature=c("Cd2","Cd3d","Cd3e")`}
 #'   \item{Add a new node to the DB}{
 #'   `SignatuR <- AddNode(SignatuR, parent_node=SignatuR$Hs, name="New_category")`}
+#'   \item{Save a local copy of your modified SignatuR DB}{
+#'   `SaveSignatuR(SignatuR, file="mySignatuR.csv")`}
+#'   \item{Load a local copy of SignatuR from disk}{
+#'   `mySignatuR <- LoadSignatuR("mySignatuR.csv")`}
 #'   \item{Save updated database (for developers)}{
 #'   `usethis::use_data(SignatuR, overwrite = TRUE)`}
 #' }
@@ -150,21 +154,23 @@ AddNode <- function(db, parent_node, name="New_signature", reference=NA) {
 
 #' Save a local copy of SignatuR
 #'
-#' Store a modified copy of your SignatuR DB, either to a .rds or .rda file
+#' Store a modified copy of your SignatuR DB, in different formats.
+#' Saving to .csv allows editing of signatures in a text or
+#' spreadsheet program
 #'
 #' @param db The database object to be saved
-#' @param file Destination file (.rds or .rda)
+#' @param file Destination file (.csv, .rds or .rda)
 #' @examples
 #' # Save DB
-#' SaveSignatuR(SignatuR, file="mySignatuR.rds")
+#' SaveSignatuR(SignatuR, file="mySignatuR.csv")
 #' # Load it back
-#' mySignatuR <- LoadSignatuR("mySignatuR.rds")
+#' mySignatuR <- LoadSignatuR("mySignatuR.csv")
 #' @import data.tree
 #' @importFrom tools file_ext
 #' @seealso [LoadSignatuR]
 #' @export 
 
-SaveSignatuR <- function(db, file="mySignatuR.rds") {
+SaveSignatuR <- function(db, file="mySignatuR.csv") {
   
   ext <- tolower(file_ext(file))
   message(sprintf("Saving %s to file: %s", db$name, file))
@@ -172,6 +178,10 @@ SaveSignatuR <- function(db, file="mySignatuR.rds") {
     saveRDS(db, file=file)
   } else if (ext == "rda") {
     save(db, file=file)
+  } else if (ext == "csv") {
+    df <- ToDataFrameTree(x = db, "pathString", "Reference","Signature")
+    df$Signature <- gsub(pattern=",", replacement = ";", x = df$Signature)
+    write.csv(df, file=file)
   } else {
     stop(sprintf("Format %s not supported", ext))
   }
@@ -179,9 +189,10 @@ SaveSignatuR <- function(db, file="mySignatuR.rds") {
 
 #' Load SignatuR from local file
 #'
-#' Load a .rds or .rda file storing a SignatuR object
+#' Load a file storing a SignatuR object. See also the
+#' function \link{SaveSignatuR} for saving existing DB.
 #'
-#' @param file Source file (.rds or .rda)
+#' @param file Source file (.csv, .rds or .rda)
 #' @return A SignatuR object
 #' @examples
 #' mySignatuR <- LoadSignatuR(file="mySignatuR.rds")
@@ -190,7 +201,7 @@ SaveSignatuR <- function(db, file="mySignatuR.rds") {
 #' @seealso [SaveSignatuR]
 #' @export 
 
-LoadSignatuR <- function(file="mySignatuR.rds") {
+LoadSignatuR <- function(file="mySignatuR.csv") {
   
   ext <- tolower(file_ext(file))
   
@@ -199,60 +210,14 @@ LoadSignatuR <- function(file="mySignatuR.rds") {
   } else if (ext == "rda") {
     name <- load(file)
     return(get(name))
+  } else if (ext == "csv") {
+    df <- read.csv(file=file)
+    df$Signature <- gsub(pattern=";", replacement = ",", x = df$Signature)
+    db <- FromDataFrameTable(df)
+    return(sig_reformat(db))
   } else {
     stop(sprintf("Cannot read file %s", file))
   }
-}
-
-#' Save a SignatuR to csv file
-#'
-#' Store a copy of your SignatuR DB to a readable .csv file
-#'
-#' @param db The database object to be saved
-#' @param file Destination file (.csv)
-#' @examples
-#' # Save DB
-#' SignatuR2csv(SignatuR, file="mySignatuR.csv")
-#' # Load it back
-#' mySignatuR <- csv2SignatuR("mySignatuR.csv")
-#' @importFrom data.tree ToDataFrameTree
-#' @seealso [csv2SignatuR]
-#' @export 
-
-SignatuR2csv <- function(db, file="mySignatuR.csv") {
-  
-  df <- ToDataFrameTree(x = db, "pathString", "Reference","Signature")
-  df$Signature <- gsub(pattern=",", replacement = ";", x = df$Signature)
-  
-  write.csv(df, file=file)
-  
-  message(sprintf("Saved to ", file))
-}
-
-#' Convert from .csv to SignatuR format
-#'
-#' Read in a SignatuR DB in .csv format, and store in memory
-#'
-#' @param file Source file (.csv)
-#' @examples
-#' # Save DB
-#' SignatuR2csv(SignatuR, file="mySignatuR.csv")
-#' # Load it back
-#' mySignatuR <- csv2SignatuR("mySignatuR.csv")
-#' @return A SignatuR object
-#' @importFrom data.tree ToDataFrameTree
-#' @seealso [SignatuR2csv]
-#' @export 
-
-csv2SignatuR <- function(file="mySignatuR.csv") {
-  
-  df <- read.csv(file=file)
-  df$Signature <- gsub(pattern=";", replacement = ",", x = df$Signature)
-  
-  db <- FromDataFrameTable(df)
-  db <- sig_reformat(db)
-  
-  return(db)
 }
 
 ### HELPER (non-exported) functions

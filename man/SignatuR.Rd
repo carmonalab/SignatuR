@@ -21,6 +21,10 @@ comments and references for the signature are stored in the "Reference" attribut
 \verb{SignatuR <- AddSignature(SignatuR, node=SignatuR$Mm$Cell_types,name="T_cell", reference="A simple T cell signature", signature=c("Cd2","Cd3d","Cd3e")}}
 \item{Add a new node to the DB}{
 \code{SignatuR <- AddNode(SignatuR, parent_node=SignatuR$Hs, name="New_category")}}
+\item{Save a local copy of your modified SignatuR DB}{
+\code{SaveSignatuR(SignatuR, file="mySignatuR.csv")}}
+\item{Load a local copy of SignatuR from disk}{
+\code{mySignatuR <- LoadSignatuR("mySignatuR.csv")}}
 \item{Save updated database (for developers)}{
 \code{usethis::use_data(SignatuR, overwrite = TRUE)}}
 }

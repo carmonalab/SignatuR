@@ -87,13 +87,14 @@ SignatuR.copy <- data.tree::Clone(SignatuR)
 
 * Save a local copy of your modified SignatuR DB
 ```r
-SaveSignatuR(SignatuR, file="mySignatuR.rds")
+SaveSignatuR(SignatuR, file="mySignatuR.csv")
 ```
 
 * Load a local copy of SignatuR from disk
 ```r
-mySignatuR <- LoadSignatuR("mySignatuR.rds")
+mySignatuR <- LoadSignatuR("mySignatuR.csv")
 ```
+
 
 * Save updated database (for package developers)
 ```r

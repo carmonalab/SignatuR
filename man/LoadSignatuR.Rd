@@ -4,16 +4,17 @@
 \alias{LoadSignatuR}
 \title{Load SignatuR from local file}
 \usage{
-LoadSignatuR(file = "mySignatuR.rds")
+LoadSignatuR(file = "mySignatuR.csv")
 }
 \arguments{
-\item{file}{Source file (.rds or .rda)}
+\item{file}{Source file (.csv, .rds or .rda)}
 }
 \value{
 A SignatuR object
 }
 \description{
-Load a .rds or .rda file storing a SignatuR object
+Load a file storing a SignatuR object. See also the
+function \link{SaveSignatuR} for saving existing DB.
 }
 \examples{
 mySignatuR <- LoadSignatuR(file="mySignatuR.rds")

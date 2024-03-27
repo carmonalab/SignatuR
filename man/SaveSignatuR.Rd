@@ -4,21 +4,23 @@
 \alias{SaveSignatuR}
 \title{Save a local copy of SignatuR}
 \usage{
-SaveSignatuR(db, file = "mySignatuR.rds")
+SaveSignatuR(db, file = "mySignatuR.csv")
 }
 \arguments{
 \item{db}{The database object to be saved}
 
-\item{file}{Destination file (.rds or .rda)}
+\item{file}{Destination file (.csv, .rds or .rda)}
 }
 \description{
-Store a modified copy of your SignatuR DB, either to a .rds or .rda file
+Store a modified copy of your SignatuR DB, in different formats.
+Saving to .csv allows editing of signatures in a text or
+spreadsheet program
 }
 \examples{
 # Save DB
-SaveSignatuR(SignatuR, file="mySignatuR.rds")
+SaveSignatuR(SignatuR, file="mySignatuR.csv")
 # Load it back
-mySignatuR <- LoadSignatuR("mySignatuR.rds")
+mySignatuR <- LoadSignatuR("mySignatuR.csv")
 }
 \seealso{
 \link{LoadSignatuR}
