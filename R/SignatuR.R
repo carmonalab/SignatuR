@@ -185,9 +185,6 @@ SaveSignatuR <- function(db, file="mySignatuR.csv") {
     df <- ToDataFrameTree(x = db, "pathString", "Reference","Signature")
     df <- df[,-1]
     
-    #TMP
- #   df$Signature <- gsub(pattern=", ", replacement = ";", x = df$Signature)
-    
     df$Signature <- gsub(pattern=",", replacement = ";", x = df$Signature)
     write.csv(df, file=file)
   } else {
