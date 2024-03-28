@@ -229,9 +229,10 @@ LoadSignatuR <- function(file="mySignatuR.csv") {
 
 #Formatting for printing signature (max 3 genes)
 sig_reformat <- function(db) {
-  clone <- data.tree::Clone(db)
-  x <- clone$RemoveAttribute("fields", stopIfNotAvailable = FALSE)
-  x <- clone$RemoveAttribute("fieldsAll", stopIfNotAvailable = FALSE)
+
+   clone <- data.tree::Clone(db)
+#  x <- clone$RemoveAttribute("fields", stopIfNotAvailable = FALSE)
+#  x <- clone$RemoveAttribute("fieldsAll", stopIfNotAvailable = FALSE)
   
   data.tree::SetFormat(node=clone, name="Signature", formatFun = function(x) {
       if (!is.na(x)) {  
