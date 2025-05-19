@@ -18,6 +18,7 @@ intermediate node is specified, all signatures below that node are returned
 as a list of signatures.
 }
 \examples{
+data(SignatuR)
 # Single signature
 GetSignature(SignatuR$Mm$Programs$HeatShock)
 # Multiple signature from intermediate node

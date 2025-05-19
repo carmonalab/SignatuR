@@ -13,6 +13,7 @@ Get the database and its accessor functions:
 ```
 remotes::install_github("carmonalab/SignatuR")
 library(SignatuR)
+data(SignatuR)
 ```
 
 ## Data format
@@ -25,6 +26,7 @@ Several functions for easy interaction with the data structure have been impleme
 
 * See database structure
 ```r
+data(SignatuR)
 SignatuR
 ```
 

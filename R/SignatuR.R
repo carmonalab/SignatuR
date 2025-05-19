@@ -37,6 +37,7 @@
 #' @param node A database node, either internal or leaf
 #' @return A single signature or list of signatures
 #' @examples
+#' data(SignatuR)
 #' # Single signature
 #' GetSignature(SignatuR$Mm$Programs$HeatShock)
 #' # Multiple signature from intermediate node
@@ -67,6 +68,7 @@ GetSignature <- function(node) {
 #' @param overwrite Whether to replace an already existing signature with the same name
 #' @return An update database containing the new signature
 #' @examples
+#' data(SignatuR)
 #' SignatuR <- AddSignature(SignatuR, node=SignatuR$Mm$Cell_types,
 #'     name="T_cell", reference="A simple T cell signature", signature=c("Cd2","Cd3d","Cd3e"))
 #' @import data.tree
@@ -112,6 +114,7 @@ AddSignature <- function(db, node, name="New_signature",
 #' @param node A database node to be removed
 #' @return Nothing. The DB is modified in place.
 #' @examples
+#' data(SignatuR)
 #' RemoveSignature(SignatuR$Hs$Compartments$TCR)
 #' @import data.tree
 #' @export 
@@ -134,6 +137,7 @@ RemoveSignature <- function(node) {
 #' @param reference Optional text to describe the node
 #' @return An update database containing the new node
 #' @examples
+#' data(SignatuR)
 #' SignatuR <- AddNode(SignatuR, parent_node=SignatuR$Hs, name="New_category")
 #' @import data.tree
 #' @export 
@@ -164,12 +168,14 @@ AddNode <- function(db, parent_node, name="New_signature", reference=NA) {
 #' @param db The database object to be saved
 #' @param file Destination file (.csv, .rds or .rda)
 #' @examples
+#' data(SignatuR)
 #' # Save DB
 #' SaveSignatuR(SignatuR, file="mySignatuR.csv")
 #' # Load it back
 #' mySignatuR <- LoadSignatuR("mySignatuR.csv")
 #' @import data.tree
 #' @importFrom tools file_ext
+#' @importFrom utils read.csv write.csv
 #' @seealso [LoadSignatuR]
 #' @export 
 
@@ -200,8 +206,13 @@ SaveSignatuR <- function(db, file="mySignatuR.csv") {
 #' @param file Source file (.csv, .rds or .rda)
 #' @return A SignatuR object
 #' @examples
-#' mySignatuR <- LoadSignatuR(file="mySignatuR.rds")
+#' data(SignatuR)
+#' # Save DB
+#' SaveSignatuR(SignatuR, file="mySignatuR.csv")
+#' # Load it back
+#' mySignatuR <- LoadSignatuR("mySignatuR.csv")
 #' @import data.tree
+#' @importFrom utils read.csv write.csv
 #' @importFrom tools file_ext
 #' @seealso [SaveSignatuR]
 #' @export 

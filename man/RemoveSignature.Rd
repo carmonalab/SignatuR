@@ -16,5 +16,6 @@ Nothing. The DB is modified in place.
 Remove a given signature or node from the database
 }
 \examples{
+data(SignatuR)
 RemoveSignature(SignatuR$Hs$Compartments$TCR)
 }

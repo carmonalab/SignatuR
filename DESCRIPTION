@@ -1,6 +1,6 @@
 Package: SignatuR
 Title: Signatures for single-cell data analysis
-Version: 0.2.1
+Version: 0.3.0
 Authors@R: c(
   person('Massimo', 'Andreatta', 
      email = 'massimo.andreatta@unil.ch',
@@ -15,13 +15,13 @@ Authors@R: c(
      role = c('aut'),
      comment = c(ORCID = '0000-0002-2495-0671'))
   )
-Description: A database of useful signatures for single-cell data analysis
+Description: A database of useful signatures for single-cell data analysis. Query the existing signatures or use it to organize your own gene sets in a hierarchical structure.
 Depends: R(>= 4.1.0)
 Imports: data.tree, tools
 Suggests: DiagrammeR
 biocViews:
-License: GPL-3 + file LICENSE
+License: GPL-3
 Encoding: UTF-8
-LazyData: TRUE
+LazyData: FALSE
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2

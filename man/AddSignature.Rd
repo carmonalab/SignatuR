@@ -8,7 +8,7 @@ AddSignature(
   db,
   node,
   name = "New_signature",
-  signature = NA,
+  signature = NULL,
   reference = NA,
   overwrite = FALSE
 )
@@ -33,6 +33,7 @@ An update database containing the new signature
 Add a new signature to the DB. This generates a local, updated copy of the database.
 }
 \examples{
+data(SignatuR)
 SignatuR <- AddSignature(SignatuR, node=SignatuR$Mm$Cell_types,
     name="T_cell", reference="A simple T cell signature", signature=c("Cd2","Cd3d","Cd3e"))
 }

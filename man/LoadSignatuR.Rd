@@ -17,7 +17,11 @@ Load a file storing a SignatuR object. See also the
 function \link{SaveSignatuR} for saving existing DB.
 }
 \examples{
-mySignatuR <- LoadSignatuR(file="mySignatuR.rds")
+data(SignatuR)
+# Save DB
+SaveSignatuR(SignatuR, file="mySignatuR.csv")
+# Load it back
+mySignatuR <- LoadSignatuR("mySignatuR.csv")
 }
 \seealso{
 \link{SaveSignatuR}

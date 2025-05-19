@@ -17,6 +17,7 @@ Saving to .csv allows editing of signatures in a text or
 spreadsheet program
 }
 \examples{
+data(SignatuR)
 # Save DB
 SaveSignatuR(SignatuR, file="mySignatuR.csv")
 # Load it back

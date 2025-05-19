@@ -22,5 +22,6 @@ An update database containing the new node
 Add a new internal node to the DB. This generates a local, updated copy of the database.
 }
 \examples{
+data(SignatuR)
 SignatuR <- AddNode(SignatuR, parent_node=SignatuR$Hs, name="New_category")
 }
